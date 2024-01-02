@@ -13,7 +13,7 @@
     "build:cjs": "babel src --out-dir lib/cjs",
     "build:esm": "BABEL_ENV=es6 babel src --out-dir lib/esm",
     "lint": "eslint src",
-    "test": "mocha --require @babel/register test/helper.js test/*-test.js*",
+    "test": "mocha --require @babel/register test/helper.mjs test/*-test.js*",
     "prepare": "npm run build",
     "preversion": "rm -rf lib && npm test",
     "version": "npm run build",
