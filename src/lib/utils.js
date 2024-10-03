@@ -12,7 +12,6 @@ import twemoji from '@twemoji/api';
 import { sanitize } from 'isomorphic-dompurify';
 
 import { Fragment, createElement } from 'react';
-import rehype from 'rehype';
 import rehype2react from 'rehype-react';
 
 import html5Embed from './html5-embed';
@@ -21,6 +20,16 @@ import relNofollow from './links-rel-nofollow';
 import replaceSymbols from './default-transformer';
 
 let counter = 0;
+let isBrowser = typeof window !== 'undefined';
+let rehype
+
+(async function () {
+  if (isBrowser) {
+    rehype = (await import('rehype-dom'));
+  } else {
+    rehype = (await import('rehype'));
+  }
+})()
 
 export function emojify(input) {
   return twemoji.parse(input);
